@@ -25,6 +25,7 @@
   "homepage": "https://github.com/stape100/UptimeTracker#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "flatpickr": "^4.6.13",
     "nedb": "^1.8.0"
   }
 }

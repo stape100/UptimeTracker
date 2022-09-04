@@ -10,14 +10,47 @@ const Datastore = require("nedb");
 const database = new Datastore("database.db");
 database.loadDatabase();
 
+// database.insert({_id: '__autoid__', value: -1});
+
+// database.getAutoId = function(onFind) {
+//   database.findOne( { _id: '__autoid__' }, function(err, doc) {
+//     if (err) {
+//       onFind && onFind(err)
+//     } else {
+//       // Update and returns the index value
+//       database.update({ _id: '__autoid__'}, { $set: {value: ++doc.value} }, {},
+//         function(err, count) {
+//           onFind && onFind(err, doc.value);
+//       });
+//     }
+//   });
+//   return database;
+// } 
+
+
+app.get('/api', (request, response) => {
+
+  database.find({}, (err, data) => {
+    if (err){
+      response.end();
+      return;
+    }
+    response.json(data);
+  })
+  
+})
+
+
+
 app.post("/api", (request, response) => {
-  console.log(request.body);
+  
   const data = request.body;
-  database.insert(data);
-  response.json({
-    confirmation: "Report Submitted",
-    site: data.site,
-    status: data.status,
-    date: data.date,
-  });
+  const timestamp = Date.now();
+  data.timestamp = timestamp
+  const ticketnumber = database.length;
+  data.ticketnumber = ticketnumber
+  database.insert(data)
+  
+
+  response.json(data)
 });

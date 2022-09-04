@@ -16,15 +16,10 @@
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    
+    <title>New Ticket Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   </head>
   <body>
     <nav
@@ -33,7 +28,7 @@
       aria-label="Third navbar example"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.html">Dashboard</a>
+        <a class="navbar-brand" href="dashboard.html "id="nav-dashboard">Dashboard</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -51,16 +46,15 @@
             <li class="nav-item">
               <a
                 class="nav-link active"
-                aria-current="page"
-                href="newticket.html"
+                href="newticket.html" id="nav-new-ticket"
                 >New Ticket</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">View Open Tickets</a>
+              <a class="nav-link" href="opentickets.html" id="nav-view-ticket">View Open Tickets</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled">Closed Tickets</a>
+              <a class="nav-link" id="nav-closed-tickets">Closed Tickets</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -91,9 +85,9 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container" id="new-ticket-form">
       <h1>Site Ticket Form</h1>
-      <h4 id="ticket--Num">Ticket Number</h4>
+      <h4 id="ticket-Num">Ticket Number</h4>
 
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label"
@@ -129,22 +123,11 @@
             <label for="exampleFormControlInput1" class="form-label"
               >Time Reported</label
             >
-            <div class="container">
-              <div class="row">
-                  
-                  <div class ='col-6 col-md-3'> 
-          <div class="content" style="position: relative">
-          <input class="form-control" type="text" id="datetimepicker" />
+          <div>
+            <form action="">
+              <input class="form-control" type="'datetime-local" placeholder="Select Time" id="timeselector">
+            </form>
           </div>
-                  </div>
-          </div>
-          </div>
-          <script>
-              $('#datetimepicker').datetimepicker({
-                  format: 'hh:mm:ss a'
-              });
-          </script> 
-            
             
   
             <div><h1></h1> </div>
@@ -166,8 +149,39 @@
                   ...
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Submit</button>
+                  
+                  <table class="table table-hover">
+                    
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="new-ticket-submit">Submit</button>
                 </div>
               </div>
             </div>
@@ -176,6 +190,23 @@
       
 
     <script src="main.js"></script>
+    <!-- <script>
+      getData()
+      async function getData(){
+          const response = await fetch('/api')
+          const data = await response.json()
+          const ticketNumDisplay = document.getElementById("ticket--Num");
+          ticketNumDisplay.textContent = ` Ticket Number ${data.length}`
+          console.log(data.length);
+
+      }
+      
+  </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      config = {enableTime: true,
+    dateFormat: "Y-m-d H:i",}
+      flatpickr("#timeselector", config);</script>
 
     <!-- <link href="main.css" rel="stylesheet" /> -->
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
