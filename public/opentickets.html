@@ -91,7 +91,7 @@
         <div class="list-group">
             <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center list-group-item-warning">Currently Open Tickets<span class="badge bg-primary rounded-pill" id="open-pill">14</span></a></button>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center list-group-item-warning">Currently Open Tickets<span class="badge bg-primary rounded-pill" id="open-pill">0</span></a></button>
             <ul class="dropdown-menu" id="open-tickets">
                 <!-- <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -101,10 +101,11 @@
               </ul>
             <h1></h1>
             <h1></h1>
-            <!-- <a href="#" class="list-group-item list-group-item-action list-group-item-danger">A simple danger list group item<span class="badge bg-primary rounded-pill">14</span></a> -->
-            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center list-group-item-success">Currently Closed Tickets<span class="badge bg-primary rounded-pill" id="close-pill">14</span></a></button>
+          </div>
+        <div class="list-group">
+          <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center list-group-item-sucess">Currently Closed Tickets<span class="badge bg-primary rounded-pill" id="close-pill">0</span></a></button>
             <ul class="dropdown-menu" id="closed-tickets">
                 <!-- <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -112,7 +113,6 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Separated link</a></li> -->
               </ul>
-            
           </div>
         <!--  -->
         <script src="main.js"></script>
@@ -123,6 +123,8 @@
                 const data = await response.json()
                 let numOpen = 0
                 let numClose = 0
+                const otickets = []
+                const osorted = otickets.sort(function(a, b){return a-b})
 
                 // Show number of open tickets on pill 
                 for (item of data) {
@@ -135,15 +137,23 @@
                     const inker = document.createElement('a');
                     inker.className = 'dropdown-item'
                     const listItem = document.createElement('li')
-                    
                     const newListItem = listItem.appendChild(inker)
-                    if (item.ticketStatus === 'Open') {
-                        openTicket.appendChild(newListItem)
-                        newListItem.textContent = `Ticket Id ${item.ticketNumber}`
+                    osorted.forEach((x, i) => newListItem.textContent = `Ticket Id ${x}`)
+                    if (item.ticketStatus === 'Open' && otickets.includes(item.ticketNumber) != true) {
+                    
+                        for (i in osorted){
+                          console.log(i);
+                          openTicket.appendChild(newListItem)
+                          
+                        }
                         numOpen ++;
                         pillOpen.textContent = numOpen;
+                        otickets.push(Number(item.ticketNumber))
+                        
+                        // console.log(osorted);
+                        
 
-                    }else if (item.ticketStatus === 'Closed') {
+                    }if (item.ticketStatus === 'Closed') {
                         closedTicket.appendChild(newListItem)
                         newListItem.textContent = `Ticket Id ${item.ticketNumber}`
                         numClose ++;
@@ -154,7 +164,10 @@
                         console.log('No data');
                     }
                     
-                    console.log(pillClose.textContent);
+                        
+                    // console.log(pillClose.textContent);
+                    console.log(otickets);
+                    console.log(typeof osorted[1]);
                   
                 }
 

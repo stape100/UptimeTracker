@@ -88,41 +88,41 @@
     <div class="container" id="new-ticket-form">
       <h1>Site Ticket Form</h1>
       <h4 id="ticket-Num">Ticket Number</h4>
-
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Site</label
-        >
-        <select class="form-select" aria-label="Default select example" id="site-select">
-          <option selected>Select Site</option>
-          <option value="1" id="open1">1</option>
-          <option value="2" id="open2">2</option>
-          <option value="3" id="'open3">3</option>
-          <option value="4" id="open4">4</option>
-          <option value="5" id="open5">5</option>
-          <option value="6" id="open6">6</option>
-          <option value="7" id="open7">7</option>
-          <option value="8" id="open8">8</option>
-          <option value="9" id="open9">9</option>
-          <option value="10" id="open10">10</option>
-        </select>
-        <div><h1></h1></div>
-
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Current Status</label
-          >
-          <select class="form-select" aria-label="Default select example" id="current-status">
-            <option selected>Select Status</option>
-            <option value="Online">Online</option>
-            <option value="Degraded">Degraded</option>
-            <option value="Offline">Offline</option>
-          </select>
-
-          <div><h1></h1> </div>
+      <div class="row g-3">
+        <div class="col">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Site</label
+            >
+            <select class="form-select" aria-label="Default select example" id="site-select">
+              <option selected>Select Site</option>
+              <option value="1" id="open1">1</option>
+              <option value="2" id="open2">2</option>
+              <option value="3" id="'open3">3</option>
+              <option value="4" id="open4">4</option>
+              <option value="5" id="open5">5</option>
+              <option value="6" id="open6">6</option>
+              <option value="7" id="open7">7</option>
+              <option value="8" id="open8">8</option>
+              <option value="9" id="open9">9</option>
+              <option value="10" id="open10">10</option>
+            </select>
+        </div>
+        <div class="col">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"
-              >Time Reported</label
+              >Current Status</label
+            >
+            <select class="form-select" aria-label="Default select example" id="current-status">
+              <option selected>Select Status</option>
+              <option value="Online">Online</option>
+              <option value="Degraded">Degraded</option>
+              <option value="Offline">Offline</option>
+            </select>
+        </div>
+      </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Time Reported (Open Ticket)</label
             >
           <div>
             <form action="">
@@ -134,18 +134,44 @@
             <label for="exampleFormControlInput1" class="form-label"
           >Reason for Downtime</label
         >
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Select Reason</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select></div>
+          <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Server
+          </label></div>
+          <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Communication
+            </label></div>
+          <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Pedastal
+            </label></div>
+          <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Electrical
+            </label></div>
+          <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Software
+            </label></div>
+          <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Other
+            </label></div>
+          
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"></label>
+            <textarea class="form-control" placeholder="Please enter any adiditional information here" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          
+        </div>
             
   
             <div><h1></h1></div>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label"
-                >Time Resolved</label
+                >Time Resolved (Close Ticket)</label
               >
             <div>
               <form action="">
@@ -165,7 +191,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="staticBackdropLabel">Ticket Summary</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" disabled data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="summary-text">
                   ...

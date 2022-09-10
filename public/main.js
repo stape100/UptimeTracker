@@ -45,13 +45,11 @@ if (submitOpenTicket) {
     let site = siteNumber.value;
     let siteStatus = currentStatus.value;
     let date = timeReported.value;
-    let ticketStatus = 'Open'
+    let ticketStatus = 'Open'   
     let data = { site, siteStatus, date, ticketStatus, ticketNumber };
-    
-    
-
 
     //For hitting the Submit button after Info is displayed to User
+
     if (newTicketSubmit){
       newTicketSubmit.addEventListener("click", function(){
         newTicketSubmit.disabled = true;
@@ -78,37 +76,6 @@ if (submitOpenTicket) {
   });
 }
 
-
-// let allTickets = [14, 15];
-// let ticketNumber = allTickets[allTickets.length - 1] + 1;
-
-// //For the submit button on te NewTicket Page
-// if (alertTrigger) {
-//   const alert = (message, type) => {
-//     const wrapper = document.createElement("div");
-//     wrapper.innerHTML = [
-//       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-//       `   <div>${message}</div>`,
-//       '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-//       "</div>",
-//     ].join("");
-
-//     submitTicket.append(wrapper);
-//   };
-
-//   alertTrigger.addEventListener(
-//     "click",
-//     () => {
-//       alert("Issue Ticket Submitted!", "success");
-//       console.log(ticketNumber);
-//       allTickets.push(ticketNumber);
-//       console.log(ticketNumber);
-//       console.log(allTickets);
-//     },
-//     { once: true }
-//   );
-// }
-
 //for the Login Button on the first page
 if (loginUsr) {
   loginUsr.addEventListener("click", function () {
@@ -120,4 +87,4 @@ if (loginUsr) {
 
 // ticketNumDisplay.textContent = `Issue Ticket Number #${ticketNumber}`;
 
-//Figure out how to add number to alltickets array dynamically possibly by setting the ticket number to be th elast entry in te array
+//Figure out how to add number to alltickets array dynamically possibly by setting the ticket number to be the last entry in te array
