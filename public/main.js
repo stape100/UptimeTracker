@@ -12,48 +12,42 @@ const submitOpenTicket = document.getElementById("submit-open-ticket");
 const siteNumber = document.getElementById("site-select");
 const currentStatus = document.getElementById("current-status");
 const timeReported = document.getElementById("timeselector");
-const newTicketSubmit = document.getElementById("new-ticket-submit")
-const navItems = document.getElementsByClassName('nav-link')
-const closeModal = document.getElementById('close-modal')
-const newTicketForm = document.getElementById('new-ticket-form')
+const newTicketSubmit = document.getElementById("new-ticket-submit");
+const navItems = document.getElementsByClassName("nav-link");
+const closeModal = document.getElementById("close-modal");
+const newTicketForm = document.getElementById("new-ticket-form");
 
 if (newTicketForm) {
-  getData()
-      async function getData(){
-          const response = await fetch('/api')
-          const data = await response.json()
-          ticketNumDisplay.textContent = ` Ticket Number ${data.length}`
-          
-      }
-
+  getData();
+  async function getData() {
+    const response = await fetch("/api");
+    const data = await response.json();
+    ticketNumDisplay.textContent = ` Ticket Number ${data.length}`;
+  }
 }
-
 
 if (submitOpenTicket) {
   submitOpenTicket.addEventListener("click", function () {
-    
-
     newTicketSubmit.disabled = false;
     // newTicketForm.reset
-
 
     summaryText.textContent = `Site # - ${siteNumber.value} ||
     Current Status - ${currentStatus.value} ||
     Time Reported - ${timeReported.value} `;
     let txtIgnore = ticketNumDisplay.textContent.split(" ");
-    let ticketNumber = txtIgnore[3]
+    let ticketNumber = txtIgnore[3];
     let site = siteNumber.value;
     let siteStatus = currentStatus.value;
     let date = timeReported.value;
-    let ticketStatus = 'Open'   
+    let ticketStatus = "Open";
     let data = { site, siteStatus, date, ticketStatus, ticketNumber };
 
     //For hitting the Submit button after Info is displayed to User
 
-    if (newTicketSubmit){
-      newTicketSubmit.addEventListener("click", function(){
+    if (newTicketSubmit) {
+      newTicketSubmit.addEventListener("click", function () {
         newTicketSubmit.disabled = true;
-        newTicketSubmit.textContent = "Report Submitted"
+        newTicketSubmit.textContent = "Report Submitted";
         const options = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -62,16 +56,12 @@ if (submitOpenTicket) {
         fetch("/api", options)
           .then((response) => response.json())
           .then((data) => console.log(data));
-
-    
-      })
-      
-    } if (closeModal) {
-      closeModal.addEventListener("click", function(){
+      });
+    }
+    if (closeModal) {
+      closeModal.addEventListener("click", function () {
         window.location.reload();
-
-      })
-      
+      });
     }
   });
 }

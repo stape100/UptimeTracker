@@ -112,7 +112,7 @@
           0
         </span>
         <ul class="dropdown-menu" id="open-tickets">
-          <li><a class="dropdown-item" href="#" id="first-open-ticket">A1</a></li>
+          <!-- <li><a class="dropdown-item" href="#" id="first-open-ticket">A1</a></li> -->
         </ul>
       </button>
         </div>
@@ -132,7 +132,7 @@
           0
         </span>
         <ul class="dropdown-menu" id="closed-tickets">
-          <li><a class="dropdown-item" href="#" id="first-close-ticket">A2</a></li>
+          <!-- <li><a class="dropdown-item" href="#" id="first-close-ticket">A2</a></li> -->
         </ul>
       </button>
         </div>
@@ -162,7 +162,7 @@
         let numOpen = 0;
         let numClose = 0;
         const otickets = [];
-        otickets.sort((a, b) => a - b);
+        // otickets.sort((a, b) => a - b);
         const ctickets = [];
         ctickets.sort((a, b) => a - b);
         
@@ -182,60 +182,46 @@
           const listItem = document.createElement("li");
           const newListItem = listItem.appendChild(inker);
           function insertIds(arr) {
-            arr.forEach(
-            (x, i) => (newListItem.innerHTML = `Ticket Id ${x}`)
-          )}
+            arr.forEach(function (item, index) {
+              newListItem.innerHTML = `Ticket Id ${item}`
+              
+            }) 
+          }
 
           //For displaying dropdown of Currently open tickets
           if (
             item.ticketStatus === "Open" &&
             otickets.includes(item.ticketNumber) != true
           ) {
-            for (i in otickets) {
-              openTicket.appendChild(newListItem);
-            }
+            
             numOpen++;
             pillOpen.textContent = numOpen;
             otickets.push(Number(item.ticketNumber));
+            otickets.forEach(function (item, index) {
+              openTicket.appendChild(newListItem);
+            
+            })
+            insertIds(otickets)
+            console.log(otickets);
 
           //For displaying dropdown of Currently closed tickets
-          } else if (item.ticketStatus === "Closed" &&
+          } else if (
+            item.ticketStatus === "Closed" &&
             ctickets.includes(item.ticketNumber) != true
           ) {
-            for (i in ctickets) { 
-              closedTicket.appendChild(newListItem);
-              console.log(`This is ${i}`);
-            }
+
             numClose++;
             pillClose.textContent = numClose;
             ctickets.push(Number(item.ticketNumber))
-          
-            
-                        
+            ctickets.forEach(function (item, index) {
+              closedTicket.appendChild(newListItem);
+            })
+            insertIds(ctickets)
+             
           } else {
             console.log("No data");
           }
-          insertIds(otickets)
-          // insertIds(ctickets)
           
-
-          // otickets.forEach(
-          //   (x, i) => (newListItem.innerHTML = `Ticket Id ${x}`)
-          // );
-          // otickets.forEach((x, i) =>
-          //   console.log(`Open- The number ${x} has index ${i}`)
-          // );
-          // ctickets.forEach(
-          //   (x, i) => (newListItem.innerHTML = `Ticket Id ${x}`)
-          // );
-          // ctickets.forEach((x, i) =>
-          //   console.log(`Closed- The number ${x} has index ${i}`)
-          // );
-          // console.log(otickets);
-          console.log(ctickets)
-          firstOpenTicket.textContent = `Ticket ID ${otickets[0]}`
-          firstCloseTicket.textContent = `Ticket ID ${ctickets[0]}`
-          // window.location.reload();
         }
       }
     </script>

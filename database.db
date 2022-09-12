@@ -1,5 +1,7 @@
 {"site":"2","siteStatus":"Degraded","date":"2022-09-09 12:00","ticketStatus":"Open","ticketNumber":"3","timestamp":1662855908802,"_id":"3VXKtb1uqtT9QrEJ"}
 {"site":"1","siteStatus":"Online","date":"2022-09-02 12:00","ticketStatus":"Open","ticketNumber":"0","timestamp":1662841222480,"_id":"IPWNu7BCv4k7WAQh"}
+{"site":"1","siteStatus":"Online","date":"2022-09-01 12:00","ticketStatus":"Open","ticketNumber":"5","timestamp":1662993180883,"_id":"YEgzi8Hv2pcdG02F"}
 {"site":"2","siteStatus":"Degraded","date":"2022-09-08 12:00","ticketStatus":"Closed","ticketNumber":"2","timestamp":1662846507210,"_id":"ZZHcjCROWtHelV8N"}
 {"site":"3","siteStatus":"Degraded","date":"2022-09-16 12:00","ticketStatus":"Closed","ticketNumber":"4","timestamp":1662862257612,"_id":"dstfgxVjCXXhryhW"}
 {"site":"1","siteStatus":"Online","date":"2022-09-09 12:00","ticketStatus":"Open","ticketNumber":"1","timestamp":1662842731326,"_id":"hinXEuyWMKVionX3"}
+{"site":"2","siteStatus":"Online","date":"2022-09-02 12:00","ticketStatus":"Closed","ticketNumber":"6","timestamp":1662995703884,"_id":"xej0SxEjljeHeTiQ"}
