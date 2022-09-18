@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="ticket-status-form">
   <head>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -146,6 +146,92 @@
         </div>
         
       </div></div>
+      <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Ticket Summary</h5>
+              <button type="button" class="btn-close" disabled data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="summary-text-ot">
+              <div class="container" id="new-ticket-form-ot">
+                
+                <h4 id="ticket-num-ot">Ticket Number</h4>
+                <div class="row g-3">
+                  <div class="col">
+                      <label for="exampleFormControlInput1" class="form-label"
+                        >Site</label
+                      >
+                      <select class="form-select" aria-label="Default select example" >
+                        <option selected id="site-select-ot">Select Site</option>
+                      </select>
+                  </div>
+                  <div class="col">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"
+                        >Current Status</label
+                      >
+                      <select class="form-select" aria-label="Default select example" >
+                        <option selected id="current-status-ot">Select Status</option>
+                      </select>
+                  </div>
+                </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"
+                        >Time Reported (Open Ticket)</label
+                      >
+                    <div>
+                      <ul class="list-group">
+                        <li class="list-group-item" id="time-reported-ot">the time selected</li>
+                        </ul>
+                    </div>
+                    <div><h1></h1></div>
+                    <div>
+                      <label for="exampleFormControlInput1" class="form-label"
+                    >Reason for Downtime</label
+                  >
+                    <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Server
+                    </label></div>
+                    <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Communication
+                      </label></div>
+                    <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Pedastal
+                      </label></div>
+                    <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Electrical
+                      </label></div>
+                    <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Software
+                      </label></div>
+                    <div><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Other
+                      </label></div>
+                    
+          
+                    <div class="mb-3">
+                      <label for="exampleFormControlTextarea1" class="form-label"></label>
+                      <textarea class="form-control" placeholder="Please enter any adiditional information here" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-modal">Exit</button>
+              <button type="button" class="btn btn-primary" id="new-ticket-update">Update Ticket</button>
+              <button type="button" class="btn btn-primary" id="new-ticket-submit">Close Ticket</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
       
 
       <h1></h1>
@@ -154,77 +240,6 @@
     
     <!--  -->
     <script src="main.js"></script>
-    <script>
-      getData();
-      async function getData() {
-        const response = await fetch("/api");
-        const data = await response.json();
-        let numOpen = 0;
-        let numClose = 0;
-        const otickets = [];
-        // otickets.sort((a, b) => a - b);
-        const ctickets = [];
-        ctickets.sort((a, b) => a - b);
-        
-
-        // Show number of open tickets on pill
-
-        for (item of data) {
-          
-          const firstOpenTicket = document.getElementById('first-open-ticket')
-          const firstCloseTicket = document.getElementById('first-close-ticket')
-          const openTicket = document.getElementById("open-tickets");
-          const closedTicket = document.getElementById("closed-tickets");
-          const pillOpen = document.getElementById("open-pill");
-          const pillClose = document.getElementById("close-pill");
-          const inker = document.createElement("a");
-          inker.className = "dropdown-item";
-          const listItem = document.createElement("li");
-          const newListItem = listItem.appendChild(inker);
-          function insertIds(arr) {
-            arr.forEach(function (item, index) {
-              newListItem.innerHTML = `Ticket Id ${item}`
-              
-            }) 
-          }
-
-          //For displaying dropdown of Currently open tickets
-          if (
-            item.ticketStatus === "Open" &&
-            otickets.includes(item.ticketNumber) != true
-          ) {
-            
-            numOpen++;
-            pillOpen.textContent = numOpen;
-            otickets.push(Number(item.ticketNumber));
-            otickets.forEach(function (item, index) {
-              openTicket.appendChild(newListItem);
-            
-            })
-            insertIds(otickets)
-            console.log(otickets);
-
-          //For displaying dropdown of Currently closed tickets
-          } else if (
-            item.ticketStatus === "Closed" &&
-            ctickets.includes(item.ticketNumber) != true
-          ) {
-
-            numClose++;
-            pillClose.textContent = numClose;
-            ctickets.push(Number(item.ticketNumber))
-            ctickets.forEach(function (item, index) {
-              closedTicket.appendChild(newListItem);
-            })
-            insertIds(ctickets)
-             
-          } else {
-            console.log("No data");
-          }
-          
-        }
-      }
-    </script>
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </body>
 </html>

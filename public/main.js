@@ -3,6 +3,8 @@
 // const navNewTicket = document.getElementById('nav-new-ticket')
 // const navViewTickets = document.getElementById('nav-view-ticket')
 // const navClosedTickets = document.getElementById('nav-closed-tickets')
+
+// Selectors for newticket.html page
 const loginUsr = document.getElementById("login--1");
 const newTicket = document.getElementById("new--ticket");
 const alertTrigger = document.getElementById("liveAlertBtn");
@@ -16,6 +18,109 @@ const newTicketSubmit = document.getElementById("new-ticket-submit");
 const navItems = document.getElementsByClassName("nav-link");
 const closeModal = document.getElementById("close-modal");
 const newTicketForm = document.getElementById("new-ticket-form");
+const firstModal = document.getElementById("staticBackdrop");
+//Selectors for opentickets.html page
+
+const firstOpenTicket = document.getElementById("first-open-ticket");
+const firstCloseTicket = document.getElementById("first-close-ticket");
+const openTicket = document.getElementById("open-tickets");
+const closedTicket = document.getElementById("closed-tickets");
+const pillOpen = document.getElementById("open-pill");
+const pillClose = document.getElementById("close-pill");
+const inker = document.createElement("a");
+inker.className = "dropdown-item";
+const listItem = document.createElement("li");
+const newListItem = listItem.appendChild(inker);
+const ticketStatusForm = document.getElementById("ticket-status-form");
+function insertIds(arr) {
+  arr.forEach(function (i, index) {
+    newListItem.textContent = `Ticket Id ${i}`;
+    console.log(`id number ${i}`);
+  });
+}
+
+//Selectors for OpenTicket modal window -ot
+const secondModal = document.getElementById("staticBackdrop2");
+const siteSelectOT = document.getElementById("site-select-ot");
+const ticketNumDisplayOT = document.getElementById("ticket-num-ot");
+const siteStatusOT = document.getElementById("current-status-ot");
+const timeReportedOT = document.getElementById("time-reported-ot");
+// const ticketNumDisplayOT = document.getElementById("ticket-Num-ot");
+
+if (ticketStatusForm) {
+  getData();
+  async function getData() {
+    const response = await fetch("/api");
+    const data = await response.json();
+    var numOpen = 0;
+    var numClose = 0;
+    const otickets = [];
+    // otickets.sort((a, b) => a - b);
+    const ctickets = [];
+    ctickets.sort((a, b) => a - b);
+
+    for (var item of data) {
+      // const firstOpenTicket = document.getElementById("first-open-ticket");
+      // const firstCloseTicket = document.getElementById("first-close-ticket");
+      const openTicket = document.getElementById("open-tickets");
+      const closedTicket = document.getElementById("closed-tickets");
+      const pillOpen = document.getElementById("open-pill");
+      const pillClose = document.getElementById("close-pill");
+      const inker = document.createElement("a");
+      inker.className = "dropdown-item";
+      const listItem = document.createElement("li");
+      const newListItem = listItem.appendChild(inker);
+      const itemSite = item.site;
+      const itemStatus = item.siteStatus;
+      const itemReportTime = item.date;
+
+      function insertIds(arr) {
+        arr.forEach(function (item, index) {
+          newListItem.innerHTML = `Ticket Id ${item}`;
+          newListItem.id = `dropdown-id-${item}`;
+          newListItem.type = "button";
+          newListItem.setAttribute("data-bs-toggle", "modal");
+          newListItem.setAttribute("data-bs-target", "#staticBackdrop2");
+          newListItem.addEventListener("click", function () {
+            ticketNumDisplayOT.textContent = `Ticket ${item} Details`;
+            siteSelectOT.textContent = `Site ${itemSite}`;
+            siteStatusOT.textContent = `${itemStatus}`;
+          });
+        });
+      }
+
+      //For displaying dropdown of Currently open tickets
+      if (
+        item.ticketStatus === "Open" &&
+        otickets.includes(item.ticketNumber) != true
+      ) {
+        numOpen++;
+        // Show number of open tickets on pill
+        pillOpen.textContent = numOpen;
+        otickets.push(Number(item.ticketNumber));
+        otickets.forEach(function (item, index) {
+          openTicket.appendChild(newListItem);
+        });
+        insertIds(otickets);
+
+        //For displaying dropdown of Currently closed tickets
+      } else if (
+        item.ticketStatus === "Closed" &&
+        ctickets.includes(item.ticketNumber) != true
+      ) {
+        numClose++;
+        pillClose.textContent = numClose;
+        ctickets.push(Number(item.ticketNumber));
+        ctickets.forEach(function (item, index) {
+          closedTicket.appendChild(newListItem);
+        });
+        insertIds(ctickets);
+      } else {
+        console.log("No data");
+      }
+    }
+  }
+}
 
 if (newTicketForm) {
   getData();
