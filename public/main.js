@@ -40,11 +40,21 @@ function insertIds(arr) {
 }
 
 //Selectors for OpenTicket modal window -ot
+const newTicketUpdate = document.getElementById('new-ticket-update')
+const newTicketClose = document.getElementById('new-ticket-close')
 const secondModal = document.getElementById("staticBackdrop2");
 const siteSelectOT = document.getElementById("site-select-ot");
 const ticketNumDisplayOT = document.getElementById("ticket-num-ot");
 const siteStatusOT = document.getElementById("current-status-ot");
 const timeReportedOT = document.getElementById("time-reported-ot");
+const downtimeReasons = document.getElementById("downtime-reasons")
+const reasonServer = document.getElementById("reason-server")
+const reasonComms = document.getElementById("reason-comms")
+const reasonPedastal = document.getElementById("reason-pedastal")
+const reasonElectrical = document.getElementById("reason-electrical")
+const reasonSoftware = document.getElementById("reason-software")
+const reasonOther = document.getElementById("reason-other")
+
 // const ticketNumDisplayOT = document.getElementById("ticket-Num-ot");
 
 if (ticketStatusForm) {
@@ -85,6 +95,7 @@ if (ticketStatusForm) {
             ticketNumDisplayOT.textContent = `Ticket ${item} Details`;
             siteSelectOT.textContent = `Site ${itemSite}`;
             siteStatusOT.textContent = `${itemStatus}`;
+            timeReportedOT.textContent = `${itemReportTime}`
           });
         });
       }
@@ -130,7 +141,7 @@ if (newTicketForm) {
     ticketNumDisplay.textContent = ` Ticket Number ${data.length}`;
   }
 }
-
+//For adding new ticket info to the datebase when a ticket is created by hitting the Submit open Ticket Button
 if (submitOpenTicket) {
   submitOpenTicket.addEventListener("click", function () {
     newTicketSubmit.disabled = false;
@@ -169,6 +180,49 @@ if (submitOpenTicket) {
       });
     }
   });
+}
+//For Updating the ticket info in the database after the 'Update Ticket' button is selected
+if (newTicketUpdate){
+  newTicketUpdate.addEventListener("click", function(){
+    
+    let rfd = []
+    const reasons = [reasonServer,reasonComms,reasonPedastal,reasonElectrical,reasonSoftware,reasonOther]
+
+    for (let i = 0; i < reasons.length; i++){
+      if (reasons[i].checked){
+        rfd.push(reasons[i].id)
+        console.log(rfd);
+      }else {
+        console.log('No reason selected');
+      }  
+    }
+    
+
+
+
+
+    
+    // if (reasonServer.checked){
+    //   rfd.push('Server')
+    // }else if (reasonComms.checked){
+    //   rfd.push('Communication')
+    // }else if (reasonPedastal.checked){
+    //   rfd.push('Pedastal')
+    // }else if (reasonElectrical.checked){
+    //   rfd.push('Electrical')
+    // }else if (reasonSoftware.checked){
+    //   rfd.push('Software')
+    // }else if (reasonOther.checked){
+    //   rfd.push('Other')
+    // }else {
+    //   alert('Please Select a Reason for Downtime')
+    // }console.log(rfd);
+    
+    
+    
+
+  })
+
 }
 
 //for the Login Button on the first page
