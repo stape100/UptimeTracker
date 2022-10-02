@@ -40,20 +40,22 @@ function insertIds(arr) {
 }
 
 //Selectors for OpenTicket modal window -ot
-const newTicketUpdate = document.getElementById('new-ticket-update')
-const newTicketClose = document.getElementById('new-ticket-close')
+const newTicketUpdate = document.getElementById("new-ticket-update");
+const newTicketClose = document.getElementById("new-ticket-close");
 const secondModal = document.getElementById("staticBackdrop2");
 const siteSelectOT = document.getElementById("site-select-ot");
 const ticketNumDisplayOT = document.getElementById("ticket-num-ot");
 const siteStatusOT = document.getElementById("current-status-ot");
 const timeReportedOT = document.getElementById("time-reported-ot");
-const downtimeReasons = document.getElementById("downtime-reasons")
-const reasonServer = document.getElementById("reason-server")
-const reasonComms = document.getElementById("reason-comms")
-const reasonPedastal = document.getElementById("reason-pedastal")
-const reasonElectrical = document.getElementById("reason-electrical")
-const reasonSoftware = document.getElementById("reason-software")
-const reasonOther = document.getElementById("reason-other")
+const downtimeReasons = document.getElementById("downtime-reasons");
+const reasonServer = document.getElementById("reason-server");
+const reasonComms = document.getElementById("reason-comms");
+const reasonPedastal = document.getElementById("reason-pedastal");
+const reasonElectrical = document.getElementById("reason-electrical");
+const reasonSoftware = document.getElementById("reason-software");
+const reasonOther = document.getElementById("reason-other");
+const additionalInfo = document.getElementById("additional-info-text");
+const timeResolved = document.getElementById("timeselector2");
 
 // const ticketNumDisplayOT = document.getElementById("ticket-Num-ot");
 
@@ -69,7 +71,7 @@ if (ticketStatusForm) {
     const ctickets = [];
     ctickets.sort((a, b) => a - b);
 
-    for (var item of data) {
+    for (let item of data) {
       // const firstOpenTicket = document.getElementById("first-open-ticket");
       // const firstCloseTicket = document.getElementById("first-close-ticket");
       const openTicket = document.getElementById("open-tickets");
@@ -95,7 +97,8 @@ if (ticketStatusForm) {
             ticketNumDisplayOT.textContent = `Ticket ${item} Details`;
             siteSelectOT.textContent = `Site ${itemSite}`;
             siteStatusOT.textContent = `${itemStatus}`;
-            timeReportedOT.textContent = `${itemReportTime}`
+            timeReportedOT.textContent = `${itemReportTime}`;
+            timeResolved.disabled = false;
           });
         });
       }
@@ -156,10 +159,56 @@ if (submitOpenTicket) {
     let siteStatus = currentStatus.value;
     let date = timeReported.value;
     let ticketStatus = "Open";
-    let data = { site, siteStatus, date, ticketStatus, ticketNumber };
+    let rfd = [];
+    let downtimeReason = rfd;
+    let info = additionalInfo.textContent;
+    let timeResolved = timeResolved.value;
 
-    //For hitting the Submit button after Info is displayed to User
+    let data = {
+      site,
+      siteStatus,
+      date,
+      ticketStatus,
+      ticketNumber,
+      downtimeReason,
+      info,
+      timeResolved,
+    };
+    if (newTicketUpdate) {
+      newTicketUpdate.addEventListener("click", function () {
+        // getData();
+        // async function getData() {
+        //   const response = await fetch("/api");
+        //   const data = await response.json();
+        // }
 
+        const reasons = [
+          reasonServer,
+          reasonComms,
+          reasonPedastal,
+          reasonElectrical,
+          reasonSoftware,
+          reasonOther,
+        ];
+
+        for (let i = 0; i < reasons.length; i++) {
+          if (reasons[i].checked) {
+            rfd.push(reasons[i].id);
+            console.log(rfd);
+          } else {
+            console.log("No reason selected");
+          }
+        }
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        };
+        fetch("/api", options)
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      });
+    }
     if (newTicketSubmit) {
       newTicketSubmit.addEventListener("click", function () {
         newTicketSubmit.disabled = true;
@@ -182,48 +231,6 @@ if (submitOpenTicket) {
   });
 }
 //For Updating the ticket info in the database after the 'Update Ticket' button is selected
-if (newTicketUpdate){
-  newTicketUpdate.addEventListener("click", function(){
-    
-    let rfd = []
-    const reasons = [reasonServer,reasonComms,reasonPedastal,reasonElectrical,reasonSoftware,reasonOther]
-
-    for (let i = 0; i < reasons.length; i++){
-      if (reasons[i].checked){
-        rfd.push(reasons[i].id)
-        console.log(rfd);
-      }else {
-        console.log('No reason selected');
-      }  
-    }
-    
-
-
-
-
-    
-    // if (reasonServer.checked){
-    //   rfd.push('Server')
-    // }else if (reasonComms.checked){
-    //   rfd.push('Communication')
-    // }else if (reasonPedastal.checked){
-    //   rfd.push('Pedastal')
-    // }else if (reasonElectrical.checked){
-    //   rfd.push('Electrical')
-    // }else if (reasonSoftware.checked){
-    //   rfd.push('Software')
-    // }else if (reasonOther.checked){
-    //   rfd.push('Other')
-    // }else {
-    //   alert('Please Select a Reason for Downtime')
-    // }console.log(rfd);
-    
-    
-    
-
-  })
-
-}
 
 //for the Login Button on the first page
 if (loginUsr) {
