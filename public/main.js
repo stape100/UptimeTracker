@@ -55,7 +55,7 @@ const reasonElectrical = document.getElementById("reason-electrical");
 const reasonSoftware = document.getElementById("reason-software");
 const reasonOther = document.getElementById("reason-other");
 const additionalInfo = document.getElementById("additional-info-text");
-const timeResolved = document.getElementById("timeselector2");
+const timeResolvedTicket = document.getElementById("timeselector2");
 
 // const ticketNumDisplayOT = document.getElementById("ticket-Num-ot");
 
@@ -98,7 +98,7 @@ if (ticketStatusForm) {
             siteSelectOT.textContent = `Site ${itemSite}`;
             siteStatusOT.textContent = `${itemStatus}`;
             timeReportedOT.textContent = `${itemReportTime}`;
-            timeResolved.disabled = false;
+            timeResolvedTicket.disabled = false;
           });
         });
       }
@@ -161,8 +161,8 @@ if (submitOpenTicket) {
     let ticketStatus = "Open";
     let rfd = [];
     let downtimeReason = rfd;
-    let info = additionalInfo.textContent;
-    let timeResolved = timeResolved.value;
+    let info = "No Info";
+    let timeResolved = "Unspecified";
 
     let data = {
       site,
@@ -174,41 +174,7 @@ if (submitOpenTicket) {
       info,
       timeResolved,
     };
-    if (newTicketUpdate) {
-      newTicketUpdate.addEventListener("click", function () {
-        // getData();
-        // async function getData() {
-        //   const response = await fetch("/api");
-        //   const data = await response.json();
-        // }
 
-        const reasons = [
-          reasonServer,
-          reasonComms,
-          reasonPedastal,
-          reasonElectrical,
-          reasonSoftware,
-          reasonOther,
-        ];
-
-        for (let i = 0; i < reasons.length; i++) {
-          if (reasons[i].checked) {
-            rfd.push(reasons[i].id);
-            console.log(rfd);
-          } else {
-            console.log("No reason selected");
-          }
-        }
-        const options = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
-        fetch("/api", options)
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-      });
-    }
     if (newTicketSubmit) {
       newTicketSubmit.addEventListener("click", function () {
         newTicketSubmit.disabled = true;
@@ -231,7 +197,64 @@ if (submitOpenTicket) {
   });
 }
 //For Updating the ticket info in the database after the 'Update Ticket' button is selected
+if (newTicketUpdate) {
+  timeResolvedTicket.disabled = false;
+  newTicketUpdate.addEventListener("click", function () {
+    let xignore = siteSelectOT.textContent.split(" ");
+    let siteNum = xignore[1];
+    console.log(siteNum);
+    let yignore = ticketNumDisplayOT.textContent.split(" ");
+    let ticNum = yignore[1];
+    let rfd = [];
+    let downtimeReasons = rfd;
 
+    const reasons = [
+      reasonServer,
+      reasonComms,
+      reasonPedastal,
+      reasonElectrical,
+      reasonSoftware,
+      reasonOther,
+    ];
+
+    for (let i = 0; i < reasons.length; i++) {
+      if (reasons[i].checked) {
+        rfd.push(reasons[i].id);
+        console.log(rfd);
+      } else {
+        console.log("No reason selected");
+      }
+    }
+    let site = siteNum;
+    let siteStatus = siteStatusOT.value;
+    let date = timeReportedOT.value;
+    let ticketStatus = "Open";
+    let ticketNumber = ticNum;
+    let downtimeReason = downtimeReasons;
+    let info = additionalInfo.value;
+    let timeResolved = timeResolvedTicket.value;
+    let timestamp = Date.now();
+    let payload = {
+      site,
+      siteStatus,
+      date,
+      ticketStatus,
+      ticketNumber,
+      downtimeReason,
+      info,
+      timeResolved,
+      timestamp,
+    };
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+    fetch("/api", options)
+      .then((response) => response.json())
+      .then((payload) => console.log(payload));
+  });
+}
 //for the Login Button on the first page
 if (loginUsr) {
   loginUsr.addEventListener("click", function () {

@@ -20,6 +20,37 @@ app.get("/api", (request, response) => {
   });
 });
 
+app.delete("/api", (request, response) => {
+  toDelete = request.body;
+  database.remove({ ticketNumber: toDelete }, {}, function (err, numRemoved) {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json("Entry" + toDelete + "Deleted");
+  });
+});
+
+app.put("/api", (request, response) => {
+  let data = request.body;
+
+  database.remove(
+    { ticketNumber: data.ticketNumber },
+    {},
+    function (err, numRemoved) {
+      if (err) {
+        response.end();
+        return;
+      }
+      response.json(data);
+
+      // numRemoved = 1
+    }
+  );
+
+  database.insert(data);
+});
+
 app.post("/api", (request, response) => {
   const data = request.body;
 
