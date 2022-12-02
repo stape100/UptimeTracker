@@ -70,22 +70,55 @@ app.post("/api", (request, response) => {
   const ticketnumber = database.length;
   data.ticketnumber = ticketnumber;
   // database.insert(data);
-
-  database.update(
-    { ticketNumber: data.ticketNumber },
-    {
-      ticketNumber: data.ticketNumber,
-      site: data.site,
-      siteStatus: data.siteStatus,
-      date: data.date,
-      ticketStatus: data.ticketStatus,
-      downtimeReason: data.downtimeReason,
-      info: data.info,
-      timeResolved: data.timeResolved,
-    },
-    { upsert: true },
-    function (err, numRelaced) {}
-  );
+  // database.remove(
+  //   { ticketNumber: data.ticketNumber },
+  //   { multi: true },
+  //   function (err, numRemoved) {}
+  // );
+  database.find({ ticketNumber: data.ticketNumber }, function (err, docs) {
+    // docs is an array containing documents Mars, Earth, Jupiter
+    // If no document is found, docs is equal to []
+    if (docs === []) {
+      database.insert(data);
+      // database.update(
+      //   { ticketNumber: data.ticketNumber },
+      //   {
+      //     ticketNumber: data.ticketNumber,
+      //     site: data.site,
+      //     siteStatus: data.siteStatus,
+      //     date: data.date,
+      //     ticketStatus: data.ticketStatus,
+      //     downtimeReason: data.downtimeReason,
+      //     info: data.info,
+      //     timeResolved: data.timeResolved,
+      //   },
+      //   { upsert: true },
+      //   function (err, numRelaced) {}
+      // );
+    } else {
+      database.remove(
+        { ticketNumber: data.ticketNumber },
+        { multi: true },
+        function (err, numRemoved) {}
+      );
+      database.insert(data);
+      // database.update(
+      //   { _id: data._id },
+      //   {
+      //     ticketNumber: data.ticketNumber,
+      //     site: data.site,
+      //     siteStatus: data.siteStatus,
+      //     date: data.date,
+      //     ticketStatus: data.ticketStatus,
+      //     downtimeReason: data.downtimeReason,
+      //     info: data.info,
+      //     timeResolved: data.timeResolved,
+      //   },
+      //   { upsert: true },
+      //   function (err, numRelaced) {}
+      // );
+    }
+  });
 
   response.json(data);
 });
