@@ -69,7 +69,23 @@ app.post("/api", (request, response) => {
   data.timestamp = timestamp;
   const ticketnumber = database.length;
   data.ticketnumber = ticketnumber;
-  database.insert(data);
+  // database.insert(data);
+
+  database.update(
+    { ticketNumber: data.ticketNumber },
+    {
+      ticketNumber: data.ticketNumber,
+      site: data.site,
+      siteStatus: data.siteStatus,
+      date: data.date,
+      ticketStatus: data.ticketStatus,
+      downtimeReason: data.downtimeReason,
+      info: data.info,
+      timeResolved: data.timeResolved,
+    },
+    { upsert: true },
+    function (err, numRelaced) {}
+  );
 
   response.json(data);
 });
