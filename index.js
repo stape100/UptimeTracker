@@ -34,21 +34,35 @@ app.delete("/api", (request, response) => {
 app.put("/api", (request, response) => {
   let data = request.body;
 
-  database.remove(
-    { ticketNumber: data.ticketNumber },
-    {},
-    function (err, numRemoved) {
-      if (err) {
-        response.end();
-        return;
+  data.getAutoincrementId = function (cb) {
+    this.update(
+      { _id: "__autoid__" },
+      { $inc: { seq: 1 } },
+      { upsert: true, returnUpdatedDocs: true },
+      function (err, affected, autoid) {
+        cb && cb(err, autoid.seq);
       }
-      response.json(data);
+    );
+    return this;
+  };
+  const timestamp = Date.now();
+  data.timestamp = timestamp;
 
-      // numRemoved = 1
+  database.find({ ticketNumber: data.ticketNumber }, function (err, docs) {
+    // If no document is found, docs is equal to []
+    if (docs === []) {
+      database.insert(data);
+    } else {
+      database.remove(
+        { ticketNumber: data.ticketNumber },
+        { multi: true },
+        function (err, numRemoved) {}
+      );
+      database.insert(data);
     }
-  );
+  });
 
-  database.insert(data);
+  response.json(data);
 });
 
 app.post("/api", (request, response) => {
@@ -69,56 +83,9 @@ app.post("/api", (request, response) => {
   data.timestamp = timestamp;
   const ticketnumber = database.length;
   data.ticketnumber = ticketnumber;
-  // database.insert(data);
-  // database.remove(
-  //   { ticketNumber: data.ticketNumber },
-  //   { multi: true },
-  //   function (err, numRemoved) {}
-  // );
-  database.find({ ticketNumber: data.ticketNumber }, function (err, docs) {
-    // docs is an array containing documents Mars, Earth, Jupiter
-    // If no document is found, docs is equal to []
-    if (docs === []) {
-      database.insert(data);
-      // database.update(
-      //   { ticketNumber: data.ticketNumber },
-      //   {
-      //     ticketNumber: data.ticketNumber,
-      //     site: data.site,
-      //     siteStatus: data.siteStatus,
-      //     date: data.date,
-      //     ticketStatus: data.ticketStatus,
-      //     downtimeReason: data.downtimeReason,
-      //     info: data.info,
-      //     timeResolved: data.timeResolved,
-      //   },
-      //   { upsert: true },
-      //   function (err, numRelaced) {}
-      // );
-    } else {
-      database.remove(
-        { ticketNumber: data.ticketNumber },
-        { multi: true },
-        function (err, numRemoved) {}
-      );
-      database.insert(data);
-      // database.update(
-      //   { _id: data._id },
-      //   {
-      //     ticketNumber: data.ticketNumber,
-      //     site: data.site,
-      //     siteStatus: data.siteStatus,
-      //     date: data.date,
-      //     ticketStatus: data.ticketStatus,
-      //     downtimeReason: data.downtimeReason,
-      //     info: data.info,
-      //     timeResolved: data.timeResolved,
-      //   },
-      //   { upsert: true },
-      //   function (err, numRelaced) {}
-      // );
-    }
-  });
+  database.insert(data);
 
   response.json(data);
 });
+
+// });

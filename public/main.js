@@ -98,6 +98,7 @@ if (ticketStatusForm) {
             siteSelectOT.textContent = `Site ${itemSite}`;
             siteStatusOT.textContent = `${itemStatus}`;
             timeReportedOT.textContent = `${itemReportTime}`;
+            // timeReportedOT.value = `${itemReportTime}`;
             timeResolvedTicket.disabled = false;
           });
         });
@@ -144,7 +145,7 @@ if (newTicketForm) {
     ticketNumDisplay.textContent = ` Ticket Number ${data.length}`;
   }
 }
-//For adding new ticket info to the datebase when a ticket is created by hitting the Submit open Ticket Button
+//For adding new ticket info to the database when a ticket is created by hitting the Submit open Ticket Button
 if (submitOpenTicket) {
   submitOpenTicket.addEventListener("click", function () {
     newTicketSubmit.disabled = false;
@@ -202,7 +203,6 @@ if (newTicketUpdate) {
   newTicketUpdate.addEventListener("click", function () {
     let xignore = siteSelectOT.textContent.split(" ");
     let siteNum = xignore[1];
-    console.log(siteNum);
     let yignore = ticketNumDisplayOT.textContent.split(" ");
     let ticNum = yignore[1];
     let rfd = [];
@@ -227,7 +227,7 @@ if (newTicketUpdate) {
     }
     let site = siteNum;
     let siteStatus = siteStatusOT.value;
-    let date = timeReportedOT.value;
+    let date = timeReportedOT.textContent;
     let ticketStatus = "Open";
     let ticketNumber = ticNum;
     let downtimeReason = downtimeReasons;
@@ -246,7 +246,7 @@ if (newTicketUpdate) {
       timestamp,
     };
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     };

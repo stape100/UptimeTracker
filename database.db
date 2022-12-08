@@ -1,4 +1,1 @@
-{"site":"2","siteStatus":"Degraded","date":"2022-12-10 12:00","ticketStatus":"Open","ticketNumber":"7","downtimeReason":[],"info":"No Info","timeResolved":"Unspecified","timestamp":1669985431700,"_id":"IvZYCBxm8Q8LEgJh"}
-{"site":"1","siteStatus":"Degraded","date":"2022-12-09 12:00","ticketStatus":"Open","ticketNumber":"2","downtimeReason":[],"info":"No Info","timeResolved":"Unspecified","timestamp":1669985953653,"_id":"xRbsC3bZCDHjOzWV"}
-{"$$deleted":true,"_id":"IvZYCBxm8Q8LEgJh"}
-{"site":"2","siteStatus":"Degraded","date":0,"ticketStatus":"Open","ticketNumber":"7","downtimeReason":["reason-server","reason-comms"],"info":"adsd","timeResolved":"2022-12-14 12:00","timestamp":1669986249458,"_id":"rGiZICBhuNzHYpj9"}
+{"site":"2","siteStatus":"Online","date":"2022-12-09 12:00","ticketStatus":"Open","ticketNumber":"0","downtimeReason":["reason-server","reason-comms"],"info":"uptdhdjhd","timeResolved":"2022-12-21 12:00","timestamp":1670440038427,"_id":"Nfs5ySEXlzXkf3mb"}
