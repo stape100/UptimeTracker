@@ -277,7 +277,70 @@ if (newTicketUpdate) {
     fetch("/api", options)
       .then((response) => response.json())
       .then((payload) => console.log(payload));
+  
+  window.location.reload()
   });
+}
+if (newTicketClose) {
+  newTicketClose.addEventListener("click", function (){
+    newTicketUpdate.disabled = true;
+    let xignore = siteSelectOT.textContent.split(" ");
+    let siteNum = xignore[1];
+    let yignore = ticketNumDisplayOT.textContent.split(" ");
+    let ticNum = yignore[1];
+    let rfd = [];
+    let downtimeReasons = rfd;
+
+    const reasons = [
+      reasonServer,
+      reasonComms,
+      reasonPedastal,
+      reasonElectrical,
+      reasonSoftware,
+      reasonOther,
+    ];
+
+    for (let i = 0; i < reasons.length; i++) {
+      if (reasons[i].checked) {
+        rfd.push(reasons[i].id);
+        console.log(rfd);
+      } else {
+        console.log("No reason selected");
+      }
+    }
+    let site = siteNum;
+    let siteStatus = siteStatusOT.value;
+    let date = timeReportedOT.textContent;
+    let ticketStatus = "Closed";
+    let ticketNumber = ticNum;
+    let downtimeReason = downtimeReasons;
+    let info = additionalInfo.value;
+    let timeResolved = timeResolvedTicket.value;
+    let timestamp = Date.now();
+    let payload = {
+      site,
+      siteStatus,
+      date,
+      ticketStatus,
+      ticketNumber,
+      downtimeReason,
+      info,
+      timeResolved,
+      timestamp,
+    };
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+    fetch("/api", options)
+      .then((response) => response.json())
+      .then((payload) => console.log(payload));
+    
+  
+  window.location.reload()
+
+  })
 }
 //for the Login Button on the first page
 if (loginUsr) {

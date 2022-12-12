@@ -1,14 +1,14 @@
-{"site":"2","siteStatus":"Online","date":"2022-12-09 12:00","ticketStatus":"Open","ticketNumber":"0","downtimeReason":["reason-server","reason-comms"],"info":"uptdhdjhd","timeResolved":"2022-12-21 12:00","timestamp":1670440038427,"_id":"Nfs5ySEXlzXkf3mb"}
-{"$$deleted":true,"_id":"Nfs5ySEXlzXkf3mb"}
-{"site":"2","siteStatus":"Online","date":"2022-12-09 12:00","ticketStatus":"Open","ticketNumber":"0","downtimeReason":["reason-server","reason-comms","reason-pedastal","reason-electrical","reason-software","reason-other"],"info":"uptdhdjhd","timeResolved":"2022-12-21 12:00","timestamp":1670857999067,"_id":"gHxLIx8aWjkPYSo0"}
-{"site":"2","siteStatus":"Degraded","date":"2022-12-08 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":[],"info":"No Info","timeResolved":"Unspecified","timestamp":1670858056274,"_id":"8bVHbTvIGWVZnmZf"}
-{"$$deleted":true,"_id":"8bVHbTvIGWVZnmZf"}
-{"site":"2","siteStatus":"Degraded","date":"2022-12-08 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":["reason-server","reason-comms","reason-software"],"info":"Mikaylah is a goat roti","timeResolved":"2022-12-22 12:00","timestamp":1670858095212,"_id":"kk9eo1kOndl1hYPN"}
-{"$$deleted":true,"_id":"kk9eo1kOndl1hYPN"}
-{"site":"2","siteStatus":"Degraded","date":"2022-12-08 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":["reason-server","reason-comms","reason-pedastal","reason-electrical","reason-software","reason-other"],"info":"Mikaylah is a goat roti","timeResolved":"2022-12-14 12:00","timestamp":1670858213683,"_id":"pJNkPQfKeYnLWK31"}
-{"$$deleted":true,"_id":"pJNkPQfKeYnLWK31"}
-{"site":"2","siteStatus":"Degraded","date":"2022-12-08 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":["reason-server","reason-comms","reason-pedastal","reason-electrical","reason-software","reason-other"],"info":"kjahksjdhaksd","timeResolved":"2022-12-14 12:00","timestamp":1670858371332,"_id":"AQIdbFR1fht4kBgu"}
-{"$$deleted":true,"_id":"AQIdbFR1fht4kBgu"}
-{"site":"2","siteStatus":"Degraded","date":"2022-12-08 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":["reason-server","reason-electrical"],"info":"kjahksjdhaksd","timeResolved":"2022-12-20 12:00","timestamp":1670858408003,"_id":"gkvqmR437jO6sj0D"}
-{"$$deleted":true,"_id":"gHxLIx8aWjkPYSo0"}
-{"site":"2","siteStatus":"Online","date":"2022-12-09 12:00","ticketStatus":"Open","ticketNumber":"0","downtimeReason":["reason-server","reason-pedastal"],"info":"kjahksjdhaksd","timeResolved":"2022-12-21 12:00","timestamp":1670858458875,"_id":"eAWKLQbEy16Nt28k"}
+{"site":"3","siteStatus":"Offline","date":"2022-12-23 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":["reason-server","reason-comms"],"info":"y2egtr7y2hefdrh12tef4f4w3ee","timeResolved":"2022-12-14 12:00","timestamp":1670881359827,"_id":"l4p3GCQcfonYfsDq"}
+{"site":"8","siteStatus":"Degraded","date":"2022-12-23 12:00","ticketStatus":"Closed","ticketNumber":"3","downtimeReason":["reason-server","reason-comms"],"info":"No Infocxbvthfv","timeResolved":"2022-12-16 12:00","timestamp":1670881366033,"_id":"sIno2pTB2HStLXWQ"}
+{"site":"1","siteStatus":"Online","date":"2022-12-15 12:00","ticketStatus":"Open","ticketNumber":"0","downtimeReason":["reason-server","reason-comms"],"info":"eg vufgzxhm vrebhdsfc vc","timeResolved":"2022-12-14 12:00","timestamp":1670881313422,"_id":"tLzqVk794qwlPy3m"}
+{"site":"2","siteStatus":"Online","date":"2022-12-24 12:00","ticketStatus":"Open","ticketNumber":"2","downtimeReason":["reason-server","reason-comms"],"info":"Server Malfunction","timeResolved":"2022-12-22 12:00","timestamp":1670881212575,"_id":"uxF2P5lcoCVL6AFd"}
+{"$$deleted":true,"_id":"sIno2pTB2HStLXWQ"}
+{"site":"8","siteStatus":"Degraded","date":"2022-12-23 12:00","ticketStatus":"Closed","ticketNumber":"3","downtimeReason":["reason-server","reason-comms"],"info":"No Infocxbvthfv","timeResolved":"2022-12-16 12:00","timestamp":1670881440540,"_id":"DlfJsNwM2G8ur1Mg"}
+{"$$deleted":true,"_id":"l4p3GCQcfonYfsDq"}
+{"site":"3","siteStatus":"Offline","date":"2022-12-23 12:00","ticketStatus":"Closed","ticketNumber":"1","downtimeReason":["reason-server","reason-comms"],"info":"y2egtr7y2hefdrh12tef4f4w3ee","timeResolved":"2022-12-14 12:00","timestamp":1670881446229,"_id":"6pivTJRpmFcndjaS"}
+{"$$deleted":true,"_id":"6pivTJRpmFcndjaS"}
+{"site":"3","siteStatus":"Offline","date":"2022-12-23 12:00","ticketStatus":"Open","ticketNumber":"1","downtimeReason":["reason-server","reason-comms"],"info":"y2egtr7y2hefdrh12tef4f4w3ee","timeResolved":"2022-12-14 12:00","timestamp":1670881459216,"_id":"BZgss9B4pibSU3Up"}
+{"$$deleted":true,"_id":"DlfJsNwM2G8ur1Mg"}
+{"site":"8","siteStatus":"Degraded","date":"2022-12-23 12:00","ticketStatus":"Open","ticketNumber":"3","downtimeReason":["reason-server","reason-comms"],"info":"No Infocxbvthfv","timeResolved":"2022-12-16 12:00","timestamp":1670881463822,"_id":"H53gj1rwfeI7z6RG"}
+{"$$deleted":true,"_id":"H53gj1rwfeI7z6RG"}
+{"site":"8","siteStatus":"Degraded","date":"2022-12-23 12:00","ticketStatus":"Closed","ticketNumber":"3","downtimeReason":["reason-server","reason-comms"],"info":"No Infocxbvthfv Mikaylh daddy 3233445556767\n","timeResolved":"2022-12-16 12:00","timestamp":1670881552195,"_id":"fPkzlhtlOkSo8i8M"}
