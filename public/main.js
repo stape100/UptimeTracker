@@ -85,7 +85,13 @@ if (ticketStatusForm) {
       const itemSite = item.site;
       const itemStatus = item.siteStatus;
       const itemReportTime = item.date;
+      const itemResolvedTime = item.timeResolved;
+      const itemInfo = item.info;
+      const itemReasons = item.downtimeReason;
 
+
+
+      // For inserting individual data on the modal window for the ticklet that is selected
       function insertIds(arr) {
         arr.forEach(function (item, index) {
           newListItem.innerHTML = `Ticket Id ${item}`;
@@ -98,8 +104,26 @@ if (ticketStatusForm) {
             siteSelectOT.textContent = `Site ${itemSite}`;
             siteStatusOT.textContent = `${itemStatus}`;
             timeReportedOT.textContent = `${itemReportTime}`;
-            // timeReportedOT.value = `${itemReportTime}`;
+            additionalInfo.textContent = `${itemInfo}`
+            for (let i = 0; i < itemReasons.length; i++) {
+              if (itemReasons[i] == 'reason-server') {
+                reasonServer.checked = true;
+              } else if (itemReasons[i] == 'reason-comms') {
+                reasonComms.checked = true;
+              } else if (itemReasons[i] == 'reason-pedastal') {
+                reasonPedastal.checked = true;
+              } else if (itemReasons[i] == 'reason-electrical') {
+                reasonElectrical.checked = true;
+              } else if (itemReasons[i] == 'reason-software') {
+                reasonSoftware.checked = true;
+              } else if (itemReasons[i] == 'reason-other') {
+                reasonOther.checked = true;
+              } else {
+                console.log('No Reasons Were Selected');
+              }
+            }
             timeResolvedTicket.disabled = false;
+            timeResolvedTicket.value = `${itemResolvedTime}`
           });
         });
       }
